@@ -301,7 +301,7 @@ destinations.
         onclick="openRebelGallery(0)">
 
         <img
-            src="../assets/rebel-1.jpg"
+            src="../assets/rebel-1.jpg?v=3"
             alt="Production Gallery">
 
         <span class="rebel-gallery-feature-overlay"></span>
@@ -326,7 +326,19 @@ destinations.
 
     <button class="gallery-arrow gallery-prev" onclick="changeRebelPhoto(-1)">❮</button>
 
-    <img id="rebel-gallery-image" src="../assets/rebel-1.jpg" alt="REBEL Gallery">
+    <img id="rebel-gallery-image" src="../assets/rebel-1.jpg?v=3" alt="REBEL Gallery">
+    <video
+    id="rebel-gallery-video"
+    playsinline
+    style="display:none;"
+    onclick="toggleRebelVideo()">
+</video>
+
+<div id="rebel-video-controls" class="rebel-video-controls" style="display:none;">
+    <button id="rebel-video-play" type="button">▶</button>
+    <input id="rebel-video-progress" type="range" min="0" max="100" value="0">
+    <span id="rebel-video-time">0:00 / 0:00</span>
+</div>
     <div id="rebel-gallery-caption" class="gallery-caption"></div>
     <div id="rebel-photo-counter" class="gallery-counter">1 / 10</div>
 
@@ -336,35 +348,35 @@ destinations.
 <script>
 const rebelPhotos = [
   {
-    src: "../assets/rebel-1.jpg",
+    src: "../assets/rebel-1.jpg?v=2",
     title: "Live Production",
     description: "Supporting a live performance from the Front of House position."
   },
   {
     src: "../assets/rebel-2.jpg",
-    title: "Front of House",
-    description: "Managing show control and system operation during a live event."
-  },
-  {
+    title: "Front of House Mixing",
+    description: "Mixing front of house for a live band on an Avid VENUE Profile console."
+},
+{
     src: "../assets/rebel-3.jpg",
-    title: "Console Workflow",
-    description: "Working through routing, processing and show control at the console."
-  },
-  {
+    title: "Monitor Mixing",
+    description: "Mixing monitors for a live artist performance on a DiGiCo SD5 console."
+},
+{
     src: "../assets/rebel-4.jpg",
-    title: "Production Support",
-    description: "Providing technical support for artists, engineers and touring crews."
-  },
-  {
+    title: "Live FOH Engineering",
+    description: "Running the front of house mix on an Avid VENUE Profile during a live concert."
+},
+{
     src: "../assets/rebel-5.jpg",
-    title: "Behind the Production",
-    description: "A closer look at the technical work supporting the performance."
-  },
-  {
+    title: "Corporate Event Production",
+    description: "Managing the front of house mix on an Avid S6L for a live corporate production."
+},
+{
     src: "../assets/rebel-6.jpg",
-    title: "Live Audio Operations",
-    description: "Maintaining reliable audio systems throughout the show."
-  },
+    title: "Behind the Mix",
+    description: "Behind the scenes at front of house, mixing a corporate production on a DiGiCo SD12 with integrated Waves processing."
+},
   {
     src: "../assets/rebel-7.jpg",
     title: "Showtime",
@@ -372,13 +384,13 @@ const rebelPhotos = [
   },
   {
     src: "../assets/rebel-8.jpg",
-    title: "Venue Production",
-    description: "Supporting the venue's audio workflow during a live production."
+    title: "FOH Show Prep",
+description: "Preparing the front of house position and console ahead of showtime."
   },
   {
     src: "../assets/rebel-9.jpg",
-    title: "Technical Coordination",
-    description: "Working alongside production teams to keep the show running smoothly."
+    title: "Support Act Monitors",
+description: "Mixing monitors for the supporting act during their live performance."
   },
   {
     src: "../assets/rebel-10.jpg",
@@ -386,7 +398,73 @@ const rebelPhotos = [
     description: "One of the many moments behind a successful live production."
   }
 ];
-
+rebelPhotos.forEach(photo => {
+    const img = new Image();
+    img.src = photo.src;
+});
+const rebelVideos = [
+  {
+    src: "../assets/rebel-videos/rebel-foh-01.mp4",
+    title: "FOH Mixing",
+    description: "Front of house mixing during a live production."
+  },
+  {
+    src: "../assets/rebel-videos/rebel-foh-02.mp4",
+    title: "FOH Mixing",
+    description: "Live console operation during a concert."
+  },
+  {
+    src: "../assets/rebel-videos/rebel-foh-03.mp4",
+    title: "FOH Mixing",
+    description: "Managing the live mix from front of house."
+  },
+  {
+    src: "../assets/rebel-videos/rebel-foh-04.mp4",
+    title: "FOH Mixing",
+    description: "Working the console during a live performance."
+  },
+  {
+    src: "../assets/rebel-videos/rebel-foh-05.mp4",
+    title: "FOH Mixing",
+    description: "Live show mixing and system operation."
+  },
+  {
+    src: "../assets/rebel-videos/rebel-foh-setup-01.mp4",
+    title: "FOH Setup",
+    description: "Preparing the front of house position before showtime."
+  },
+  {
+    src: "../assets/rebel-videos/rebel-console-repair-01.mp4",
+    title: "Console Maintenance",
+    description: "Replacing and servicing a console fader."
+  },
+  {
+    src: "../assets/rebel-videos/rebel-full-production-setup.mp4",
+    title: "Full Production Setup",
+    description: "Monitor wedges, sidefills, consoles, DJ gear, patching and routing."
+  },
+  {
+   src: "../assets/rebel-videos/rebel-stage-performance-01.mp4",
+title: "Full Band Monitor Mix",
+description: "Mixing monitors for a full band, managing individual stage mixes throughout the live performance."
+  },
+  {
+    src: "../assets/rebel-videos/rebel-stage-performance-02.mp4",
+title: "Support Artist Monitors",
+description: "Mixing monitors, delivering a consistent stage mix throughout the live performance."
+  },
+  {
+    src: "../assets/rebel-videos/rebel-stage-performance-03.mp4",
+title: "Live Monitor Engineering",
+description: "Managing monitor mixes throughout the live performance."
+  },
+  {
+    src: "../assets/rebel-videos/rebel-stage-performance-04.mp4",
+    title: "Live Performance",
+    description: "A look inside the live production environment."
+  }
+];
+const rebelGallery = [...rebelPhotos, ...rebelVideos];
 let currentPhoto = 0;
 
 function openRebelGallery(photoNumber = 0) {
@@ -397,8 +475,92 @@ function openRebelGallery(photoNumber = 0) {
 }
 
 function closeRebelGallery() {
+    const video = document.getElementById("rebel-gallery-video");
+    video.pause();
+    video.currentTime = 0;
+
     document.getElementById("rebel-gallery-modal").classList.remove("open");
 }
+function toggleRebelVideo() {
+    const video = document.getElementById("rebel-gallery-video");
+
+    if (video.paused) {
+        video.play();
+    } else {
+        video.pause();
+    }
+}
+const rebelVideo = document.getElementById("rebel-gallery-video");
+const rebelVideoPlay = document.getElementById("rebel-video-play");
+const rebelVideoProgress = document.getElementById("rebel-video-progress");
+const rebelVideoTime = document.getElementById("rebel-video-time");
+
+function formatRebelTime(seconds) {
+    if (!Number.isFinite(seconds)) return "0:00";
+
+    const minutes = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+
+    return `${minutes}:${secs.toString().padStart(2, "0")}`;
+}
+
+rebelVideoPlay.addEventListener("click", () => {
+    toggleRebelVideo();
+});
+
+rebelVideo.addEventListener("play", () => {
+    rebelVideoPlay.textContent = "❚❚";
+});
+
+rebelVideo.addEventListener("pause", () => {
+    rebelVideoPlay.textContent = "▶";
+});
+
+rebelVideo.addEventListener("timeupdate", () => {
+    if (!rebelVideo.duration) return;
+
+    rebelVideoProgress.value =
+        (rebelVideo.currentTime / rebelVideo.duration) * 100;
+
+    rebelVideoTime.textContent =
+        `${formatRebelTime(rebelVideo.currentTime)} / ${formatRebelTime(rebelVideo.duration)}`;
+});
+
+rebelVideoProgress.addEventListener("input", () => {
+    if (!rebelVideo.duration) return;
+
+    rebelVideo.currentTime =
+        (rebelVideoProgress.value / 100) * rebelVideo.duration;
+});
+
+let rebelControlsTimer;
+
+function showRebelControls() {
+    const controls = document.getElementById("rebel-video-controls");
+
+    clearTimeout(rebelControlsTimer);
+
+    controls.style.opacity = "1";
+    controls.style.pointerEvents = "auto";
+
+    rebelControlsTimer = setTimeout(() => {
+        controls.style.opacity = "0";
+        controls.style.pointerEvents = "none";
+    }, 1500);
+}
+let lastMouseX = null;
+let lastMouseY = null;
+
+rebelVideo.addEventListener("mousemove", (event) => {
+    if (event.clientX === lastMouseX && event.clientY === lastMouseY) return;
+
+    lastMouseX = event.clientX;
+    lastMouseY = event.clientY;
+
+    showRebelControls();
+});
+
+
 function closeGalleryFromBackdrop(event) {
     if (event.target.id === "rebel-gallery-modal") {
         closeRebelGallery();
@@ -406,24 +568,56 @@ function closeGalleryFromBackdrop(event) {
 }
 
 function changeRebelPhoto(direction) {
-    currentPhoto = (currentPhoto + direction + rebelPhotos.length) % rebelPhotos.length;
+    currentPhoto = (currentPhoto + direction + rebelGallery.length) % rebelGallery.length;
     showPhoto();
 }
 
 function showPhoto() {
-    const photo = rebelPhotos[currentPhoto];
+    const photo = rebelGallery[currentPhoto];
+    const isVideo = photo.src.toLowerCase().endsWith(".mp4");
 
     const image = document.getElementById("rebel-gallery-image");
+    const video = document.getElementById("rebel-gallery-video");
+    const controls = document.getElementById("rebel-video-controls");
     const caption = document.getElementById("rebel-gallery-caption");
     const counter = document.getElementById("rebel-photo-counter");
+    if (isVideo) {
+    image.style.display = "none";
+    video.style.display = "block";
+} else {
+    video.pause();
+    video.style.display = "none";
+    image.style.display = "block";
+    image.style.visibility = "visible";
+    image.style.opacity = "1";
+}
+controls.style.display = isVideo ? "flex" : "none";
+ if (isVideo) {
+    controls.style.opacity = "1";
+    controls.style.pointerEvents = "auto";
 
-    image.style.opacity = "0";
+    clearTimeout(rebelControlsTimer);
+    rebelControlsTimer = setTimeout(() => {
+        controls.style.opacity = "0";
+        controls.style.pointerEvents = "none";
+    }, 1500);
+} else {
+    controls.style.opacity = "0";
+    controls.style.pointerEvents = "none";
+}
 
-setTimeout(() => {
+if (isVideo) {
+    video.src = photo.src;
+    video.load();
+    video.currentTime = 0;
+    video.play();
+} else {
     image.src = photo.src;
     image.alt = photo.title;
+    image.style.display = "block";
+    image.style.visibility = "visible";
     image.style.opacity = "1";
-}, 180);
+}
 
     caption.innerHTML = `
         <strong>${photo.title}</strong>
@@ -431,7 +625,7 @@ setTimeout(() => {
     `;
 
     counter.textContent =
-        `${currentPhoto + 1} / ${rebelPhotos.length}`;
+        `${currentPhoto + 1} / ${rebelGallery.length}`;
 }
 document.addEventListener("keydown", (event) => {
     const galleryModal = document.getElementById("rebel-gallery-modal");

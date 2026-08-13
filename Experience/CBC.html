@@ -3,28 +3,318 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>CBC | Akheam Jackson</title>
 
   <link rel="stylesheet" href="../styles.css">
 </head>
 
 <body>
-<a href="../index.html" class="button button-secondary">← Back to Home</a>
-<section class="section">
 
-  <p class="eyebrow">Experience</p>
+  <a href="../index.html" class="button button-secondary">← Back to Home</a>
 
-  <h1>CBC</h1>
 
-  <h2>Radio Broadcast Engineer</h2>
+  <!-- ===== CBC HERO ===== -->
 
-  <p>
-    This page will showcase my work with CBC, including live radio recording,
-    Avid S6L workflows, Pro Tools multitrack recording, microphone deployment,
-    signal routing and production support.
-  </p>
+  <section class="section cbc-hero-section">
 
-</section>
+    <div class="cbc-hero-image">
+      <img
+        src="../assets/cbc-studio.jpg?v=2"
+        alt="CBC live recording production"
+        loading="eager"
+        decoding="sync">
+    </div>
 
+    <div class="cbc-hero-copy">
+
+      <p class="eyebrow">Experience</p>
+
+      <h1>CBC</h1>
+
+      <h2>Radio Recording Engineer</h2>
+
+      <p>
+        Working as a part-time freelance Radio Recording Engineer with CBC,
+        travelling to venues and live production sites across the GTA to
+        capture artists, bands and special performances. My role covers live
+        multitrack recording, microphone deployment, console and signal-flow
+        setup, Pro Tools recording, production coordination and technical
+        troubleshooting, delivering high-quality recordings for mixing and
+        distribution across CBC platforms.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- ===== CBC ROLE & RESPONSIBILITIES ===== -->
+
+  <section class="section cbc-role-section">
+
+    <p class="eyebrow">Role & Responsibilities</p>
+
+    <h2>Capturing live performances for broadcast and digital platforms.</h2>
+
+    <div class="cbc-role-grid">
+
+      <div class="cbc-role-card">
+        <h3>Live Multitrack Recording</h3>
+        <p>
+          Capturing live performances on location with reliable multitrack
+          recording workflows designed for post-production, broadcast and
+          digital distribution.
+        </p>
+      </div>
+
+      <div class="cbc-role-card">
+        <h3>Avid S6L & Signal Flow</h3>
+        <p>
+          Configuring console routing, stage inputs, recording splits and
+          signal paths to integrate CBC recording systems with venue and
+          production infrastructure.
+        </p>
+      </div>
+
+      <div class="cbc-role-card">
+        <h3>Pro Tools Recording</h3>
+        <p>
+          Building and managing Pro Tools sessions for live capture,
+          including input organization, track preparation, recording
+          verification and session management.
+        </p>
+      </div>
+
+      <div class="cbc-role-card">
+        <h3>Microphone Deployment</h3>
+        <p>
+          Selecting and positioning microphones for artists, instruments,
+          audience capture and ambience while adapting to different venues
+          and production requirements.
+        </p>
+      </div>
+
+      <div class="cbc-role-card">
+        <h3>Production & Venue Integration</h3>
+        <p>
+          Working alongside venue engineers, production companies, artists
+          and CBC teams to integrate recording systems without disrupting
+          the live-show workflow.
+        </p>
+      </div>
+
+      <div class="cbc-role-card">
+        <h3>Technical Support & Troubleshooting</h3>
+        <p>
+          Managing patching, clocking, digital audio routing, system checks
+          and real-time troubleshooting to maintain reliable recordings
+          throughout production.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ===== CBC GALLERY ===== -->
+
+  <section class="section cbc-gallery-section">
+
+    <p class="eyebrow">Gallery</p>
+
+    <h2>Inside CBC live recording productions.</h2>
+
+    <div class="cbc-gallery-grid">
+
+      <div class="cbc-gallery-card">
+        <img
+          src="../assets/cbc/cbc-1.jpg?v=2"
+          alt="CBC on-location recording"
+          loading="lazy"
+          decoding="async">
+
+        <div class="cbc-gallery-label">
+          <span>On-Location Recording</span>
+        </div>
+      </div>
+
+
+      <div class="cbc-gallery-card">
+        <img
+          src="../assets/cbc/cbc-2.jpg?v=2"
+          alt="CBC Avid S6L recording workflow"
+          loading="lazy"
+          decoding="async">
+
+        <div class="cbc-gallery-label">
+          <span>On-Location Production</span>
+        </div>
+      </div>
+
+
+      <div class="cbc-gallery-card">
+        <img
+          src="../assets/cbc/cbc-3.jpg?v=2
+          alt="CBC Pro Tools multitrack recording"
+          loading="lazy"
+          decoding="async">
+        <div class="cbc-gallery-label">
+          <span>CBC Music Production</span>
+        </div>
+      </div>
+
+
+      <div class="cbc-gallery-card">
+        <img
+          src="../assets/cbc/cbc-4.jpg?v=2
+          alt="CBC live production"
+          loading="lazy"
+           decoding="async">
+
+        <div class="cbc-gallery-label">
+          <span>Recording Engineer</span>
+        </div>
+      </div>
+
+
+      <div class="cbc-gallery-card">
+        <img
+          src="../assets/cbc/cbc-5.jpg?v=2
+          alt="CBC broadcast recording"
+          loading="lazy"
+          decoding="async">
+
+        <div class="cbc-gallery-label">
+          <span>Recording Control Room</span>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+<script src="../script.js"></script>
+<script>
+(() => {
+  const cards = [...document.querySelectorAll(".cbc-gallery-card")];
+
+  if (!cards.length) return;
+
+  const images = cards
+    .map(card => card.querySelector("img"))
+    .filter(Boolean);
+
+  let currentIndex = 0;
+  let touchStartX = 0;
+
+  const lightbox = document.createElement("div");
+  lightbox.className = "cbc-lightbox";
+
+  lightbox.innerHTML = `
+    <button class="cbc-lightbox-close" aria-label="Close gallery">×</button>
+
+    <button class="cbc-lightbox-nav cbc-lightbox-prev" aria-label="Previous image">
+      ‹
+    </button>
+
+    <div class="cbc-lightbox-content">
+      <img class="cbc-lightbox-image" src="" alt="CBC gallery image">
+
+      <div class="cbc-lightbox-info">
+        <span class="cbc-lightbox-caption"></span>
+        <span class="cbc-lightbox-counter"></span>
+      </div>
+    </div>
+
+    <button class="cbc-lightbox-nav cbc-lightbox-next" aria-label="Next image">
+      ›
+    </button>
+  `;
+
+  document.body.appendChild(lightbox);
+
+  const largeImage = lightbox.querySelector(".cbc-lightbox-image");
+  const caption = lightbox.querySelector(".cbc-lightbox-caption");
+  const counter = lightbox.querySelector(".cbc-lightbox-counter");
+  const closeBtn = lightbox.querySelector(".cbc-lightbox-close");
+  const prevBtn = lightbox.querySelector(".cbc-lightbox-prev");
+  const nextBtn = lightbox.querySelector(".cbc-lightbox-next");
+
+  function showImage(index) {
+  currentIndex = (index + images.length) % images.length;
+
+  const image = images[currentIndex];
+  const card = image.closest(".cbc-gallery-card");
+  const label =
+    card.querySelector(".cbc-gallery-label span")?.textContent || "";
+
+  largeImage.src = image.currentSrc || image.src;
+  largeImage.alt = image.alt || "CBC gallery image";
+
+  caption.textContent = label;
+  counter.textContent = `${currentIndex + 1} / ${images.length}`;
+
+  largeImage.classList.add("cbc-image-visible");
+}
+
+  function openLightbox(index) {
+    showImage(index);
+    lightbox.classList.add("cbc-lightbox-open");
+    document.body.classList.add("cbc-lightbox-active");
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove("cbc-lightbox-open");
+    document.body.classList.remove("cbc-lightbox-active");
+  }
+
+  cards.forEach((card, index) => {
+    card.addEventListener("click", () => openLightbox(index));
+  });
+
+  closeBtn.addEventListener("click", closeLightbox);
+
+  prevBtn.addEventListener("click", event => {
+    event.stopPropagation();
+    showImage(currentIndex - 1);
+  });
+
+  nextBtn.addEventListener("click", event => {
+    event.stopPropagation();
+    showImage(currentIndex + 1);
+  });
+
+  lightbox.addEventListener("click", event => {
+    if (event.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener("keydown", event => {
+    if (!lightbox.classList.contains("cbc-lightbox-open")) return;
+
+    if (event.key === "Escape") closeLightbox();
+    if (event.key === "ArrowLeft") showImage(currentIndex - 1);
+    if (event.key === "ArrowRight") showImage(currentIndex + 1);
+  });
+
+  lightbox.addEventListener("touchstart", event => {
+    touchStartX = event.changedTouches[0].screenX;
+  }, { passive: true });
+
+  lightbox.addEventListener("touchend", event => {
+    const touchEndX = event.changedTouches[0].screenX;
+    const distance = touchEndX - touchStartX;
+
+    if (Math.abs(distance) < 50) return;
+
+    if (distance > 0) {
+      showImage(currentIndex - 1);
+    } else {
+      showImage(currentIndex + 1);
+    }
+  }, { passive: true });
+})();
+</script>
 </body>
 </html>
